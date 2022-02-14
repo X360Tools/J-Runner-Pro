@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("J-Runner with Extras")]
-[assembly: AssemblyDescription("The Ultimate RGH/JTAG App with Extras")]
+[assembly: AssemblyTitle("J-Runner Pro")]
+[assembly: AssemblyDescription("The Ultimate RGH/JTAG App")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("X360Tools")]
-[assembly: AssemblyProduct("J-Runner with Extras")]
-[assembly: AssemblyCopyright("Copyright © J-Runner Developers 2012-2021")]
+[assembly: AssemblyProduct("J-Runner Pro")]
+[assembly: AssemblyCopyright("Copyright © J-Runner Developers 2012-2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

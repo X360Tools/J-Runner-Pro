@@ -25,8 +25,6 @@ using MessageBox = System.Windows.Forms.MessageBox;
 using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 using SaveFileDialog = System.Windows.Forms.SaveFileDialog;
 
-// Copyright (c) 2022 J-Runner with Extras Development Team
-
 namespace JRunner
 {
     public partial class MainForm : Form
@@ -136,7 +134,7 @@ namespace JRunner
             trayIcon.ContextMenuStrip = trayContext;
             trayIcon.MouseClick += new MouseEventHandler(activateWindow);
             trayIcon.Icon = Properties.Resources.Project3;
-            trayIcon.Text = "J-Runner with Extras";
+            trayIcon.Text = "J-Runner Pro";
             trayIcon.Visible = false;
 
             settings();
@@ -389,7 +387,7 @@ namespace JRunner
         private void printstartuptext(bool firsttime = false)
         {
             Console.WriteLine("=========================================================================");
-            Console.WriteLine("J-Runner with Extras");
+            Console.WriteLine("J-Runner Pro");
             Console.WriteLine("Session: {0:F}", DateTime.Now.ToString("MM/dd/yyyy H:mm:ss"));
             if (variables.version.Contains("Beta")) Console.WriteLine("Version: {0}", variables.build);
             else Console.WriteLine("Version: {0}", variables.version);
@@ -472,7 +470,7 @@ namespace JRunner
                 Assets = new Assets
                 {
                     LargeImageKey = "j-runner",
-                    LargeImageText = "J-Runner with Extras",
+                    LargeImageText = "J-Runner Pro",
                     SmallImageKey = ""
                 }
             });
@@ -551,7 +549,7 @@ namespace JRunner
                 Assets = new Assets
                 {
                     LargeImageKey = "j-runner",
-                    LargeImageText = "J-Runner with Extras",
+                    LargeImageText = "J-Runner Pro",
                     SmallImageKey = ""
                 }
             });
@@ -2972,7 +2970,7 @@ namespace JRunner
         public void killShade()
         {
             shade.Dispose();
-            this.Text = "J-Runner with Extras";
+            this.Text = "J-Runner Pro";
         }
 
         private void reportIssueToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2983,7 +2981,7 @@ namespace JRunner
 
         private void shortcutsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("J-Runner with Extras has several shortcut keybinds:\n\n" +
+            MessageBox.Show("J-Runner Pro has several shortcut keybinds:\n\n" +
                 "Operations:\n" +
                 "Esc - Cancel active task (if possible)\n" +
                 "F1 - New Session\n" +

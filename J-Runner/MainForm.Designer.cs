@@ -1207,7 +1207,7 @@ namespace JRunner
             this.MinimumSize = new System.Drawing.Size(848, 639);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "J-Runner with Extras";
+            this.Text = "J-Runner Pro";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);

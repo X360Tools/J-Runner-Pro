@@ -50,8 +50,8 @@ namespace JRunner
             this.SuccessWizard.Pages.Add(this.SuccessPage);
             this.SuccessWizard.Size = new System.Drawing.Size(554, 401);
             this.SuccessWizard.TabIndex = 0;
-            this.SuccessWizard.Text = "J-Runner with Extras";
-            this.SuccessWizard.Title = "J-Runner with Extras";
+            this.SuccessWizard.Text = "J-Runner Pro";
+            this.SuccessWizard.Title = "J-Runner Pro";
             this.SuccessWizard.TitleIcon = ((System.Drawing.Icon)(resources.GetObject("SuccessWizard.TitleIcon")));
             // 
             // SuccessPage
@@ -94,7 +94,7 @@ namespace JRunner
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(279, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "J-Runner with Extras has been updated successfully!";
+            this.label1.Text = "J-Runner Pro has been updated successfully!";
             // 
             // UpdateSuccess
             // 
@@ -109,7 +109,7 @@ namespace JRunner
             this.MinimizeBox = false;
             this.Name = "UpdateSuccess";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "J-Runner with Extras";
+            this.Text = "J-Runner Pro";
             ((System.ComponentModel.ISupportInitialize)(this.SuccessWizard)).EndInit();
             this.SuccessPage.ResumeLayout(false);
             this.SuccessPage.PerformLayout();

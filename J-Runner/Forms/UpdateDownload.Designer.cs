@@ -47,8 +47,8 @@ namespace JRunner
             this.UpdateWizard.Pages.Add(this.UpdatePage);
             this.UpdateWizard.Size = new System.Drawing.Size(554, 401);
             this.UpdateWizard.TabIndex = 2;
-            this.UpdateWizard.Text = "J-Runner with Extras";
-            this.UpdateWizard.Title = "J-Runner with Extras";
+            this.UpdateWizard.Text = "J-Runner Pro";
+            this.UpdateWizard.Title = "J-Runner Pro";
             this.UpdateWizard.TitleIcon = ((System.Drawing.Icon)(resources.GetObject("UpdateWizard.TitleIcon")));
             // 
             // UpdatePage
@@ -84,7 +84,7 @@ namespace JRunner
             this.MinimizeBox = false;
             this.Name = "UpdateDownload";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "J-Runner with Extras";
+            this.Text = "J-Runner Pro";
             ((System.ComponentModel.ISupportInitialize)(this.UpdateWizard)).EndInit();
             this.UpdatePage.ResumeLayout(false);
             this.ResumeLayout(false);

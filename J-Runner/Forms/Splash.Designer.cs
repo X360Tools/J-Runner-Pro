@@ -54,7 +54,7 @@ namespace JRunner
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(247, 24);
             this.label1.TabIndex = 5;
-            this.label1.Text = "J-Runner with Extras";
+            this.label1.Text = "J-Runner Pro";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
@@ -97,7 +97,7 @@ namespace JRunner
             this.Name = "Splash";
             this.Opacity = 0.9D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "J-Runner with Extras";
+            this.Text = "J-Runner Pro";
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.ResumeLayout(false);
 

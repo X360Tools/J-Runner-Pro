@@ -43,7 +43,7 @@ namespace JRunner
 
                 if (needVcredistx86)
                 {
-                    MessageBox.Show("Microsoft Visual C++ 2010 Redistributable is required for J-Runner with Extras and some of its components to work correctly\n\nClick OK to begin the installation", "Dependency Missing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Microsoft Visual C++ 2010 Redistributable is required for J-Runner Pro and some of its components to work correctly\n\nClick OK to begin the installation", "Dependency Missing", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Thread Vcredist = new Thread(() =>
                     {
                         try

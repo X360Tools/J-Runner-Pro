@@ -49,8 +49,8 @@ namespace JRunner
             this.FailedWizard.Pages.Add(this.FailedPage);
             this.FailedWizard.Size = new System.Drawing.Size(554, 401);
             this.FailedWizard.TabIndex = 0;
-            this.FailedWizard.Text = "J-Runner with Extras";
-            this.FailedWizard.Title = "J-Runner with Extras";
+            this.FailedWizard.Text = "J-Runner Pro";
+            this.FailedWizard.Title = "J-Runner Pro";
             this.FailedWizard.TitleIcon = ((System.Drawing.Icon)(resources.GetObject("FailedWizard.TitleIcon")));
             // 
             // FailedPage
@@ -92,7 +92,7 @@ namespace JRunner
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(361, 75);
             this.label1.TabIndex = 1;
-            this.label1.Text = "J-Runner with Extras could not be updated\r\n\r\n\r\n\r\nCheck your network connection, o" +
+            this.label1.Text = "J-Runner Pro could not be updated\r\n\r\n\r\n\r\nCheck your network connection, o" +
     "r download the update manually";
             // 
             // UpdateFailed
@@ -108,7 +108,7 @@ namespace JRunner
             this.MinimizeBox = false;
             this.Name = "UpdateFailed";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "J-Runner with Extras";
+            this.Text = "J-Runner Pro";
             this.Load += new System.EventHandler(this.UpdateFailed_Load);
             ((System.ComponentModel.ISupportInitialize)(this.FailedWizard)).EndInit();
             this.FailedPage.ResumeLayout(false);

@@ -31,7 +31,7 @@ namespace JRunner
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/X360Tools/J-Runner-with-Extras/releases");
+            System.Diagnostics.Process.Start("https://github.com/X360Tools/J-Runner-Pro/releases");
         }
     }
 }

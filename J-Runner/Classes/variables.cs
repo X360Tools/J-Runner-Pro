@@ -113,7 +113,7 @@ namespace JRunner
         public static string pathforit = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static string currentdir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static string outfolder = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "output");
-        public static string AppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "J-Runner with Extras");
+        public static string AppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "J-Runner Pro");
         public static string tempfile = "";
         public static string cpkey = "";
         public static bool gotvalues = false;

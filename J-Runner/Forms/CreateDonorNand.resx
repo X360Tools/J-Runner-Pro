@@ -122,7 +122,7 @@
 
 You can get it from XeLL:
 
-- When using the Get CPU Key option in J-Runner with Extras, the Lock Down Value is printed into the console
+- When using the Get CPU Key option in J-Runner Pro, the Lock Down Value is printed into the console
 
 - You also can count the number of "f" characters in fuselines 07 to 11</value>
   </data>
@@ -624,7 +624,7 @@ You can get it from XeLL:
 </value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>Welcome to the J-Runner with Extras Donor Nand Creation Wizard
+    <value>Welcome to the J-Runner Pro Donor Nand Creation Wizard
 
 
 Before you begin:

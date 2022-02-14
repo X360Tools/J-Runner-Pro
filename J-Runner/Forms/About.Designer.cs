@@ -50,7 +50,7 @@ namespace JRunner.Forms
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(247, 24);
             this.label1.TabIndex = 1;
-            this.label1.Text = "J-Runner with Extras";
+            this.label1.Text = "J-Runner Pro";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblCredits

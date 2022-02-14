@@ -92,7 +92,7 @@ namespace JRunner
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(478, 65);
             this.label1.TabIndex = 0;
-            this.label1.Text = "We\'d love to hear from you in order to make J-Runner with Extras better!\r\n\r\nPleas" +
+            this.label1.Text = "We\'d love to hear from you in order to make J-Runner Pro better!\r\n\r\nPleas" +
     "e make sure you check open issues first before creating an issue, as duplicates " +
     "will be closed.";
             // 

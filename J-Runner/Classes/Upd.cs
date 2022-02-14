@@ -1,4 +1,5 @@
 ﻿using Ionic.Zip;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -15,83 +16,103 @@ namespace JRunner
         public static bool checkSuccess = true; // Default true
         public static bool upToDate = true; // Default true
         public static string failedReason = "Unknown";
-        static string changelog = "Could not retrieve changelog for some reason!"; // Overwritten if successful
-        static string deltaUrl, fullUrl;
-        static int serverRevision = 0;
-        static int minDeltaRevision = 0;
-        static string expectedDeltaMd5 = "";
-        static string expectedFullMd5 = "";
+        static string expectedMd5;
         static WebClient wc = null;
         static UpdateDownload updateDownload = null;
-        static XmlTextReader xml = null;
 
         public static void check()
         {
             UpdateCheck updateCheck = new UpdateCheck();
             updateCheck.Show();
 
+            string tagName = null;
+            string updateUrl = null;
+            string changelog = null;
+
+            JsonTextReader reader = null;
             try
             {
-                xml = new XmlTextReader("https://cdn.octalsconsoleshop.com/jrunner/autoupdate.xml");
-                xml.MoveToContent();
-                string name = "";
-
-                if (xml.NodeType == XmlNodeType.Element && xml.Name == "jrunner")
+                using (WebClient client = new WebClient())
                 {
-                    while (xml.Read())
+                    client.Headers.Add("User-Agent", "J-Runner");
+                    client.Headers.Add("Accept", "application/vnd.github.v3+json");
+                    reader = new JsonTextReader(new StringReader(client.DownloadString("https://api.github.com/repos/X360Tools/J-Runner-with-Extras/releases")));
+
+                    string name = "";
+                    int deep = 0;
+                    bool isAssets = false;
+                    int assetsDeep = 0;
+                    string assetName = "";
+                    string assetUrl = "";
+                    while (reader.Read())
                     {
-                        if (xml.NodeType == XmlNodeType.Element)
+                        if (reader.Value != null)
                         {
-                            name = xml.Name;
+                            Console.WriteLine("Token: {0}, Value: {1}", reader.TokenType, reader.Value);
                         }
                         else
                         {
-                            string key;
-                            if (xml.NodeType == XmlNodeType.Text && xml.HasValue && (key = name) != null)
+                            Console.WriteLine("Token: {0}", reader.TokenType);
+                        }
+
+                        if (reader.TokenType == JsonToken.StartObject)
+                        {
+                            deep++;
+                        }
+                        else if (reader.TokenType == JsonToken.EndObject)
+                        {
+                            deep--;
+
+                            if (deep == 0)
+                                break;
+
+                            if (isAssets && assetsDeep == deep)
                             {
-                                if (key == "min-delta-revision")
+                                if (assetName == "J-Runner.with.Extras.zip")
                                 {
-                                    if (!int.TryParse(xml.Value, out minDeltaRevision))
-                                    {
-                                        Upd.checkSuccess = false; // Defaults true
-                                        throw new Exception(); // Cancel the rest and go to catch
-                                    }
-                                }
-                                else if (key == "revision")
-                                {
-                                    if (!int.TryParse(xml.Value, out serverRevision))
-                                    {
-                                        Upd.checkSuccess = false; // Defaults true
-                                        throw new Exception(); // Cancel the rest and go to catch
-                                    }
-                                }
-                                else if (key == "changelog")
-                                {
-                                    changelog = xml.Value;
-                                }
-                                else if (key == "delta")
-                                {
-                                    deltaUrl = xml.Value;
-                                }
-                                else if (key == "full")
-                                {
-                                    fullUrl = xml.Value;
-                                }
-                                else if (key == "md5-delta")
-                                {
-                                    expectedDeltaMd5 = xml.Value;
-                                }
-                                else if (key == "md5-full")
-                                {
-                                    expectedFullMd5 = xml.Value;
+                                    updateUrl = assetUrl;
                                 }
                             }
                         }
-                    }
+                        else if (reader.TokenType == JsonToken.StartArray)
+                        {
+                            if (name == "assets")
+                            {
+                                isAssets = true;
+                                assetsDeep = deep;
+                            }
+                        }
+                        else if (reader.TokenType == JsonToken.EndArray)
+                        {
+                            if (isAssets && assetsDeep == deep)
+                            {
+                                isAssets = false;
+                            }
+                        }
+                        else if (reader.TokenType == JsonToken.PropertyName)
+                        {
+                            name = (string)reader.Value;
+                            continue;
+                        }
+                        else
+                        {
+                            if (!isAssets)
+                            {
+                                if (name == "tag_name")
+                                    tagName = (string)reader.Value;
+                                if (name == "body")
+                                    changelog = (string)reader.Value;
+                            }
+                            else
+                            {
+                                if (name == "name")
+                                    assetName = (string)reader.Value;
+                                else if (name == "browser_download_url")
+                                    assetUrl = (string)reader.Value;
+                            }
 
-                    if (serverRevision == 0) // If this happened we didn't get revision sucessfully, there is never revision 0
-                    {
-                        Upd.checkSuccess = false; // Defaults true
+                            name = "";
+                        }
                     }
                 }
             }
@@ -101,9 +122,9 @@ namespace JRunner
             }
             finally
             {
-                if (xml != null)
+                if (reader != null)
                 {
-                    xml.Close();
+                    reader.Close();
                 }
             }
 
@@ -112,7 +133,7 @@ namespace JRunner
 
             if (Upd.checkSuccess)
             {
-                if (variables.revision >= serverRevision) // Up to Date
+                if (variables.version == tagName) // Up to Date
                 {
                     Upd.upToDate = true;
                     Application.Run(new MainForm());
@@ -126,34 +147,19 @@ namespace JRunner
                         // Do nothing and launch as normal
                         Application.Run(new MainForm());
                     }
-                    else if (variables.revision >= minDeltaRevision) // Delta
-                    {
-                        updateDownload = new UpdateDownload();
-
-                        Thread updateDelta = new Thread(() =>
-                        {
-                            if (File.Exists(@"delta.zip")) File.Delete(@"delta.zip");
-
-                            wc = new WebClient();
-                            wc.DownloadProgressChanged += updateDownload.updateProgress;
-                            wc.DownloadFileCompleted += delta;
-                            wc.DownloadFileAsync(new System.Uri(deltaUrl), "delta.zip");
-                        });
-                        updateDelta.Start();
-                        Application.Run(updateDownload);
-                    }
                     else // Full
                     {
                         updateDownload = new UpdateDownload();
 
                         Thread updateFull = new Thread(() =>
                         {
-                            if (File.Exists(@"full.zip")) File.Delete(@"full.zip");
+                            if (File.Exists(@"full.zip"))
+                                File.Delete(@"full.zip");
 
                             wc = new WebClient();
                             wc.DownloadProgressChanged += updateDownload.updateProgress;
                             wc.DownloadFileCompleted += full;
-                            wc.DownloadFileAsync(new System.Uri(fullUrl), "full.zip");
+                            wc.DownloadFileAsync(new System.Uri(updateUrl), "full.zip");
                         });
                         updateFull.Start();
                         Application.Run(updateDownload);
@@ -163,27 +169,6 @@ namespace JRunner
             else
             {
                 Application.Run(new MainForm());
-            }
-        }
-
-        private static void delta(object sender, AsyncCompletedEventArgs e)
-        {
-            wc.Dispose();
-
-            if (e.Cancelled)
-            {
-                // Do nothing
-            }
-            else if (e.Error != null)
-            {
-                if (File.Exists(@"delta.zip")) File.Delete(@"delta.zip");
-                updateDownload.Dispose();
-                failedReason = "Failed to download the package";
-                Application.Run(new UpdateFailed());
-            }
-            else
-            {
-                install(true);
             }
         }
 
@@ -197,35 +182,33 @@ namespace JRunner
             }
             else if (e.Error != null)
             {
-                if (File.Exists(@"full.zip")) File.Delete(@"full.zip");
-                updateDownload.Dispose();
+                if (File.Exists(@"full.zip"))
+                    File.Delete(@"full.zip");
+                updateDownload.BeginInvoke(new Action(() => updateDownload.Dispose()));
                 failedReason = "Failed to download the package";
                 Application.Run(new UpdateFailed());
             }
             else
             {
+                var headers = (sender as WebClient)?.ResponseHeaders;
+
+                expectedMd5 = simpleByteArrayToString(Convert.FromBase64String(headers["Content-MD5"]));
+
                 install();
             }
         }
 
-        private static void install(bool delta = false)
+        private static void install()
         {
-            string filename;
-            if (delta) filename = @"delta.zip";
-            else filename = @"full.zip";
-
-            string expectedMd5;
-            if (delta) expectedMd5 = expectedDeltaMd5;
-            else expectedMd5 = expectedFullMd5;
-
             try
             {
-                updateDownload.installMode();
+                updateDownload.BeginInvoke(new Action(() => updateDownload.installMode()));
 
-                if (simpleCheckMD5(filename) != expectedMd5)
+                if (simpleCheckMD5(@"full.zip") != expectedMd5)
                 {
-                    if (File.Exists(filename)) File.Delete(filename);
-                    updateDownload.Dispose();
+                    if (File.Exists(@"full.zip"))
+                        File.Delete(@"full.zip");
+                    updateDownload.BeginInvoke(new Action(() => updateDownload.Dispose()));
                     failedReason = "Package checksum is invalid";
                     Application.Run(new UpdateFailed());
                     return;
@@ -234,21 +217,22 @@ namespace JRunner
                 File.Move(@"JRunner.exe", @"JRunner.exe.old");
 
                 // Unzip
-                using (ZipFile zip = ZipFile.Read(filename))
+                using (ZipFile zip = ZipFile.Read(@"full.zip"))
                 {
                     zip.ExtractAll(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
                 }
-                File.Delete(filename);
+                File.Delete(@"full.zip");
             }
             catch
             {
-                if (File.Exists(filename)) File.Delete(filename);
-                updateDownload.Dispose();
+                if (File.Exists(@"full.zip"))
+                    File.Delete(@"full.zip");
+                updateDownload.BeginInvoke(new Action(() => updateDownload.Dispose()));
                 failedReason = "Failed to extract and install the package";
                 Application.Run(new UpdateFailed());
             }
 
-            updateDownload.Dispose();
+            updateDownload.BeginInvoke(new Action(() => updateDownload.Dispose()));
             Application.Run(new UpdateSuccess());
         }
 
@@ -275,8 +259,8 @@ namespace JRunner
         {
             wc.CancelAsync();
             Thread.Sleep(100);
-            if (File.Exists(@"delta.zip")) File.Delete(@"delta.zip");
-            if (File.Exists(@"full.zip")) File.Delete(@"full.zip");
+            if (File.Exists(@"full.zip"))
+                File.Delete(@"full.zip");
             Application.ExitThread();
             Application.Exit();
         }

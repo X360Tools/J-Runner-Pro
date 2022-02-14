@@ -67,10 +67,8 @@ namespace JRunner
                     Vcredist.Start();
                     return;
                 }
-                else
-                {
-                    Upd.check();
-                }
+                
+                Upd.check();
             }
             else
             {

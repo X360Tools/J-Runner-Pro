@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("J-Runner with Extras")]
 [assembly: AssemblyDescription("The Ultimate RGH/JTAG App with Extras")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Octal450")]
+[assembly: AssemblyCompany("X360Tools")]
 [assembly: AssemblyProduct("J-Runner with Extras")]
 [assembly: AssemblyCopyright("Copyright © J-Runner Developers 2012-2021")]
 [assembly: AssemblyTrademark("")]

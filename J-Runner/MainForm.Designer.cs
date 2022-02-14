@@ -127,7 +127,6 @@ namespace JRunner
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changelogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportIssueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shortcutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
@@ -986,7 +985,6 @@ namespace JRunner
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem,
-            this.changelogToolStripMenuItem,
             this.reportIssueToolStripMenuItem,
             this.shortcutsToolStripMenuItem,
             this.toolStripMenuItem4,
@@ -1005,13 +1003,6 @@ namespace JRunner
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // changelogToolStripMenuItem
-            // 
-            this.changelogToolStripMenuItem.Name = "changelogToolStripMenuItem";
-            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.changelogToolStripMenuItem.Text = "Changelog";
-            this.changelogToolStripMenuItem.Click += new System.EventHandler(this.changelogToolStripMenuItem_Click_1);
             // 
             // reportIssueToolStripMenuItem
             // 
@@ -1319,7 +1310,6 @@ namespace JRunner
         private Button btnNewSession;
         private ToolStripMenuItem newSessionToolStripMenuItem;
         private ToolStripMenuItem shortcutsToolStripMenuItem;
-        private ToolStripMenuItem changelogToolStripMenuItem;
         private ToolStripMenuItem versionToolStripMenuItem;
         private ToolStripMenuItem checkSecdataToolStripMenuItem;
         private ToolStripMenuItem xValueToolStripMenuItem;

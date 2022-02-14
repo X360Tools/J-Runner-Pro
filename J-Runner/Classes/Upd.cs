@@ -50,17 +50,9 @@ namespace JRunner
                     int assetsDeep = 0;
                     string assetName = "";
                     string assetUrl = "";
+                    bool prerelease = false;
                     while (reader.Read())
                     {
-                        if (reader.Value != null)
-                        {
-                            Console.WriteLine("Token: {0}, Value: {1}", reader.TokenType, reader.Value);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Token: {0}", reader.TokenType);
-                        }
-
                         if (reader.TokenType == JsonToken.StartObject)
                         {
                             deep++;
@@ -70,7 +62,16 @@ namespace JRunner
                             deep--;
 
                             if (deep == 0)
-                                break;
+                            {
+                                if (prerelease)
+                                {
+                                    tagName = null;
+                                    updateUrl = null;
+                                    changelog = null;
+                                }
+                                else
+                                    break;
+                            }
 
                             if (isAssets && assetsDeep == deep)
                             {
@@ -106,8 +107,10 @@ namespace JRunner
                             {
                                 if (name == "tag_name")
                                     tagName = (string)reader.Value;
-                                if (name == "body")
+                                else if (name == "body")
                                     changelog = (string)reader.Value;
+                                else if (name == "prerelease")
+                                    prerelease = (bool)reader.Value;
                             }
                             else
                             {
@@ -136,6 +139,9 @@ namespace JRunner
 
             Thread.Sleep(100);
             updateCheck.Dispose();
+
+            if (tagName == null || updateUrl == null || changelog == null)
+                Upd.checkSuccess = false;
 
             if (Upd.checkSuccess)
             {

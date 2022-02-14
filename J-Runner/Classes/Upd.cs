@@ -22,6 +22,12 @@ namespace JRunner
 
         public static void check()
         {
+            if (variables.version.Contains("Pre-Release"))
+            {
+                Application.Run(new MainForm());
+                return;
+            }
+
             UpdateCheck updateCheck = new UpdateCheck();
             updateCheck.Show();
 

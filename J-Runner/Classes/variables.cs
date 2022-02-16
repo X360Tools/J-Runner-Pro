@@ -92,7 +92,7 @@ namespace JRunner
             MODEJR,
             MODEFW
         }
-        public static string version = "3.1.0d Pre-Release";
+        public static string version = "3.1.0d";
         public static string build = "3103." + GetLinkerTime(Assembly.GetExecutingAssembly()).ToString("yyMMdd.HHmm");
         public static bool iswriting;
         public static bool isscanningip = false;

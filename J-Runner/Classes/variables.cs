@@ -94,7 +94,6 @@ namespace JRunner
         }
         public static string version = "3.1.0d Pre-Release";
         public static string build = "3103." + GetLinkerTime(Assembly.GetExecutingAssembly()).ToString("yyMMdd.HHmm");
-        public const string staticversion = "3.1.0.3";
         public static bool iswriting;
         public static bool isscanningip = false;
         public static JR_MODE current_mode = JR_MODE.MODEJR;

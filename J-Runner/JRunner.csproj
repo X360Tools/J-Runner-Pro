@@ -595,7 +595,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StaticVersion.cs" />
     <Compile Include="Classes\variables.cs" />
     <Compile Include="Forms\UpdateSuccess.cs">
       <SubType>Form</SubType>

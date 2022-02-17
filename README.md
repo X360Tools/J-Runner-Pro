@@ -1,5 +1,5 @@
-# J-Runner with Extras
-The Ultimate RGH/JTAG App
+# J-Runner Pro
+###### The Ultimate RGH/JTAG App
 
 System Requirements:
 - x86 based Windows PC (i386 or amd64)

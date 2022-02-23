@@ -92,7 +92,7 @@ namespace JRunner
             MODEJR,
             MODEFW
         }
-        public static string version = "3.1.0d2";
+        public static string version = "3.1.1 Pre-Release";
         public static string build = "3103." + GetLinkerTime(Assembly.GetExecutingAssembly()).ToString("yyMMdd.HHmm");
         public static bool iswriting;
         public static bool isscanningip = false;
@@ -274,12 +274,17 @@ namespace JRunner
         public enum hacktypes
         {
             nothing = 0,
-            retail = 1,
-            glitch = 2,
-            jtag = 3,
-            glitch2 = 4,
-            glitch2m = 5,
-            devgl = 6
+            retail,
+            glitch,
+            jtag,
+            glitch2,
+            glitch2m,
+            devgl,
+            devgl16,
+            devkit,
+            devkit16,
+            testkit,
+            testkit16
         }
         public static consoles ctyp = cunts[0];
         public static hacktypes ttyp = hacktypes.retail;
